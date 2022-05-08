@@ -1,19 +1,41 @@
-import React, { Fragment } from "react"
+import React, { Component } from "react"
 import ReactDOM from "react-dom"
 import "./style.css"
 
- const element = 'Digital Innovation'
- const element2 = <h1>Olá, Mundo!</h1>
+ class App extends Component {
+   constructor(props){
+     super(props)
 
+     this.state = {
+       clock: 1000,
+       copo: 'água'
+   }
+ }
 
-function App() {
-  return (
-    <div>
-    {element}
-    {element2}
-    </div>
-  )
-}
+  componentDidMount() {
+   window.setTimeout(() => {
+     this.setState({
+       copo: 'suco'
+     })
+   }, 3000)
+  }
 
-const rootElement = document.getElementById("root")
-ReactDOM.render(<App />, rootElement)
+  alterarCopo = () => {
+    this.setState({
+      copo: 'refrigerante'
+    })
+  }
+
+  render() {
+    const { clock, copo } = this.state
+    return (
+      <div>
+        <h1>{clock}</h1>
+        <button onClick={() => this.alterarCopo()}><h1>{copo}</h1></button>
+      </div>
+    )
+  }
+ }
+
+ const rootElement = document.getElementById("root")
+ ReactDOM.render(<App />, rootElement)
